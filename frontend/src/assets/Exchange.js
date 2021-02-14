@@ -1,0 +1,3 @@
+export const EXCHANGEADD = {
+    address: "0x3990c4AD580006Cb44301490476eB010Ab21CfB2",
+};
