@@ -6,8 +6,8 @@ import { Menu } from 'semantic-ui-react';
 const Toolbar = () => {
     const [activeItem,setActiveItem] = useState('DEX');
 
-    const menuClick = (e) => {
-        //setActiveItem({name});
+    const menuClick = (e,{name}) => {
+        setActiveItem(name);
         //console.log(e);
     }
     return (

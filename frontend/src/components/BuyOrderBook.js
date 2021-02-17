@@ -12,11 +12,23 @@ const BuyOrderBook = ({firstToken,firstAddress,secondToken,secondAddress}) => {
     const [orderSize,setOrderSize] = useState(0);
     const [orders,setOrders] = useState([]);
 
+    const orderState = (offerId,sell,buy) => {
+        let price = sell.dividedBy(buy).toNumber();
+        let amount = buy.dividedBy(UNIT).toNumber();
+        let total = sell.dividedBy(UNIT).toNumber();
+
+        setOrders(orders => [...orders, {
+            id: offerId,
+            price: price,
+            amount: amount,
+            total: total,
+        }]);
+    }
+
     useEffect(() => {
         const getOrderList = async () => {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const contract = new ethers.Contract(exchangeAddress, exchange.abi, provider);
-            console.log(firstToken,firstAddress,secondToken,secondAddress);
 
             if (firstAddress && secondAddress) {
                 let offerSize = await contract.getOfferSize(secondAddress,firstAddress);
@@ -29,11 +41,9 @@ const BuyOrderBook = ({firstToken,firstAddress,secondToken,secondAddress}) => {
 
     useEffect(() => {
         const getOrders = async () => {
-            console.log(orderSize);
             if (orderSize > 0) {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const contract = new ethers.Contract(exchangeAddress, exchange.abi, provider);
-                console.log(orderSize);
 
                 setOrders([]);
     
@@ -43,36 +53,22 @@ const BuyOrderBook = ({firstToken,firstAddress,secondToken,secondAddress}) => {
                 let sell = new BigNumber(offers[1].toString());
                 let buy = new BigNumber(offers[3].toString());
 
-                let price = sell.dividedBy(buy).toNumber();
-                let amount = buy.dividedBy(UNIT).toNumber();
-                let total = sell.dividedBy(UNIT).toNumber();
+                orderState(offerId,sell,buy);
 
-                console.log(price,amount,total);
-
-                setOrders(orders => [...orders, {
-                    id: offerId,
-                    price: price,
-                    amount: amount,
-                    total: total,
-                }]);
 
                 for (let i = 1; i < orderSize; ++i) {
-                    offerId = (await contract.getPrevOffer(offerId)).toNumber();
-                    offers = await contract.getOfferPerId(offerId);
+                    let offId1;
+
+                    if (i === 1) {
+                        offId1 = offerId;
+                    }
+                    offId1 = (await contract.getPrevOffer(offId1)).toNumber();
+                    offers = await contract.getOfferPerId(offId1);
 
                     sell = new BigNumber(offers[1].toString());
                     buy = new BigNumber(offers[3].toString());
                     
-                    price = sell.dividedBy(buy).toNumber();
-                    amount = buy.dividedBy(UNIT).toNumber();
-                    total = sell.dividedBy(UNIT).toNumber();
-
-                    setOrders(orders => [...orders, {
-                        id: offerId,
-                        price: price,
-                        amount: amount,
-                        total: total,
-                    }]);
+                    orderState(offId1,sell,buy);
                 }
             } else {
                 setOrders([]);
@@ -80,7 +76,7 @@ const BuyOrderBook = ({firstToken,firstAddress,secondToken,secondAddress}) => {
         }
 
         getOrders();
-    },[orderSize,firstAddress,secondAddress]);
+    },[orderSize]);
 
     
 

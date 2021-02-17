@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useEffect } from 'react'; 
 import { useWeb3React } from '@web3-react/core';
 import useSWR from 'swr';
 import { formatEther, formatUnits } from "@ethersproject/units";
@@ -37,7 +37,7 @@ export const Balance = () => {
     return () => {
       library.removeAllListeners('block');
     };
-  },[]);
+  },[library,mutate]);
 
   if(!balance) {
     return <div>...</div>
@@ -68,7 +68,7 @@ export const TokenBalance = ({ symbol, address, decimals }) => {
       library.removeAllListeners(fromAcc);
       library.removeAllListeners(toAcc);
     };
-  },[]);
+  },[library,mutate,account,address]);
 
   if(!balance) {
     return <Table.Body>...</Table.Body>

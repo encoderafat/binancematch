@@ -29,8 +29,6 @@ const UserOrders = () => {
         const dexContract = new ethers.Contract(exchangeAddress, exchange.abi, provider);
         const dexSigned = dexContract.connect(signer);
 
-        console.log(e);
-
         let success = await dexSigned.cancelOffer(BigNumber.from(e));
     }
 
@@ -55,7 +53,6 @@ const UserOrders = () => {
                     return (
                         q.args[0].toString())
                 });
-                console.log(qArray);
                 let fArray = fulfilledQuery.map(q => {
                     return (
                         q.args[0].toString())
@@ -66,9 +63,7 @@ const UserOrders = () => {
                 });
                 qArray = qArray.filter(item => !fArray.includes(item));
                 qArray = qArray.filter(item => !cArray.includes(item));
-                console.log(qArray);
                 queryOrders = queryOrders1.filter(item => qArray.includes(item.args[0].toString()));
-                console.log(queryOrders);
                 setTableHeading('Outstanding Orders');
                 setCancellable(true);
             } else if (orderType === 1) {
@@ -120,7 +115,7 @@ const UserOrders = () => {
                 <Dropdown placeholder="Manage Orders" options={options} onChange={selectOrderType} fluid search selection/>
             </Grid.Row>
             <Grid.Row>
-                <h2 style={{textAlign: "center"}}>{options[orderType].text}</h2>
+                <h2 style={{textAlign: "center"}}>{tableHeading}</h2>
             </Grid.Row>
             <Grid.Row centered>
                 <Table celled padded>

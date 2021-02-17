@@ -8,10 +8,8 @@ const Faucet = () => {
     const faucetAddress = '0x0c5ed53cAa685707A15B377e8c8c7b83A56247F7';
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    //console.log(signer);
 
     const handleClick = async () => {
-        //console.log(faucet);
         const contract = new ethers.Contract(faucetAddress, faucet.abi, provider);
         const contractWithSigner = contract.connect(signer);
         let txWithdraw = await contractWithSigner.withdraw();
