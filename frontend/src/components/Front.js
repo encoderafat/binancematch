@@ -9,7 +9,7 @@ const Front = ({onButtonClick}) => {
             <p>2. Connect Metamask To Binance Smart Chain Testnet</p>
             <Segment>
                 <p><b>Network Name:</b> Smart Chain - Testnet</p>
-                <p><b>New RPC URL:</b> https://data-seed-prebsc-1-s1.binance.org:8545/</p>
+                <p><b>New RPC URL:</b> https://data-seed-prebsc-1-s1.binance.org:8545/ <i>or</i> https://data-seed-prebsc-1-s2.binance.org:8545/</p>
                 <p><b>ChainID:</b> 97</p>
                 <p><b>Symbol:</b> BNB</p>
                 <p><b>Block Explorer URL:</b> https://testnet.bscscan.com</p>
