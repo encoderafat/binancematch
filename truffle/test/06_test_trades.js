@@ -153,8 +153,6 @@ contract("Trades", async accounts => {
         
         //console.log(offers[0],offers[1].toString(),offers[2],offers[3].toString());
 
-        //console.log(txTrade1);
-
         // Account 2 creates an order of 1/2 RTOK/STOK with 100 STOK
 
         sellAmount = "585000000000000000000";
@@ -181,8 +179,6 @@ contract("Trades", async accounts => {
 
         //offers = await exchange.getOfferPerId(offerId.toNumber());
         //console.log(offers[0],offers[1].toString(),offers[2],offers[3].toString());
-
-        //console.log(txTrade2);
 
         offerSize = await exchange.getOfferSize(rtokenAddress,stokenAddress);
 

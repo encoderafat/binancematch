@@ -15,8 +15,10 @@ contract Dex is Ownable {
     struct OfferData {
         uint sellAmount;
         address sellTokenAddress;
+        string sellTokenSymbol;
         IERC20 sellToken;
         uint buyAmount;
+        string buyTokenSymbol;
         address buyTokenAddress;
         IERC20 buyToken;
         address who;
@@ -68,11 +70,11 @@ contract Dex is Ownable {
 
     event TokenAdded(address _tokenAddress, string _tokenName, string _tokenSymbol, uint _timeStamp);
 
-    event OrderAddedToMarketEscrow(uint indexed _id,address indexed _from, address _sellTokenAddress, address _buyTokenAddress,
+    event OrderAddedToMarketEscrow(uint indexed _id,address indexed _from, string _sellTokenSymbol, string _buyTokenSymbol,
      uint _sellAmount, uint _buyAmount, uint _timeStamp);
-    event OrderCancelled(uint indexed _id, address indexed _from, address _sellTokenAddress, address _buyTokenAddress,
+    event OrderCancelled(uint indexed _id, address indexed _from, string _sellTokenSymbol, string _buyTokenSymbol,
      uint _sellAmount, uint _buyAmount, uint _timeStamp );
-    event OrderFulFilled(uint indexed _id, address indexed _owner, address _sellTokenAddress, address _buyTokenAddress,
+    event OrderFulFilled(uint indexed _id, address indexed _owner, string _sellTokenSymbol, string _buyTokenSymbol,
      uint _sellAmount, uint _buyAmount, uint _timeStamp );
 
     // re-entry Check
@@ -273,6 +275,8 @@ contract Dex is Ownable {
 
         offer.sellTokenAddress = _tokenAddress1;
         offer.buyTokenAddress = _tokenAddress2;
+        offer.sellTokenSymbol = tokens[tokenSymbolIndex1].tokenSymbol;
+        offer.buyTokenSymbol = tokens[tokenSymbolIndex2].tokenSymbol;
         offer.sellAmount = _quantity1;
         offer.buyAmount = _quantity2;
         offer.sellToken = IERC20(tokens[tokenSymbolIndex1].tokenAddress);
@@ -285,7 +289,8 @@ contract Dex is Ownable {
 
         offerList[id] = offer;
 
-        emit OrderAddedToMarketEscrow(id, msg.sender, _tokenAddress1, _tokenAddress2, _quantity1, _quantity2, offer.timeStamp);
+        emit OrderAddedToMarketEscrow(id, msg.sender, offer.sellTokenSymbol, offer.buyTokenSymbol, _quantity1,
+         _quantity2, offer.timeStamp);
 
         return id;
     }
@@ -307,7 +312,7 @@ contract Dex is Ownable {
         delete offerList[_id];
 
         require(offer.sellToken.transfer(offer.who,offer.sellAmount));
-        emit OrderCancelled(_id,offer.who,offer.sellTokenAddress,offer.buyTokenAddress,offer.sellAmount,offer.buyAmount,now);
+        emit OrderCancelled(_id,offer.who,offer.sellTokenSymbol,offer.buyTokenSymbol,offer.sellAmount,offer.buyAmount,now);
         return true;
     }
 
@@ -329,7 +334,7 @@ contract Dex is Ownable {
 
         if (offerList[id].sellAmount == 0) {
             deleteOffer(id);
-            emit OrderFulFilled(id,temp.who,temp.sellTokenAddress,temp.buyTokenAddress,temp.sellAmount,temp.buyAmount,now);
+            emit OrderFulFilled(id,temp.who,temp.sellTokenSymbol,temp.buyTokenSymbol,temp.sellAmount,temp.buyAmount,now);
         }
     }
 
