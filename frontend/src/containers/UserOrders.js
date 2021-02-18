@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { ethers, BigNumber } from "ethers";
+import { ethers } from "ethers";
 import { useWeb3React } from '@web3-react/core';
 import exchange from '../contracts/Dex.json';
 import { EXCHANGEADD } from '../assets/Exchange';
 import Toolbar from '../components/Toolbar';
 import { Table, Dropdown, Grid, Button } from 'semantic-ui-react';
+import BigNumber from 'bignumber.js';
 
-
+const UNIT = 1000000000000000000;
 const exchangeAddress = EXCHANGEADD.address;
 
 const UserOrders = () => {
@@ -29,7 +30,7 @@ const UserOrders = () => {
         const dexContract = new ethers.Contract(exchangeAddress, exchange.abi, provider);
         const dexSigned = dexContract.connect(signer);
 
-        let success = await dexSigned.cancelOffer(BigNumber.from(e));
+        let success = await dexSigned.cancelOffer(e);
     }
 
     useEffect( () => {
@@ -44,6 +45,7 @@ const UserOrders = () => {
             if (orderType === 0) {
                 order = dexContract.filters.OrderAddedToMarketEscrow(null,account);
                 let queryOrders1 = await dexContract.queryFilter(order);
+                console.log(queryOrders1);
                 let fulfilledOrder = dexContract.filters.OrderFulFilled(null,account);
                 let fulfilledQuery = await dexContract.queryFilter(fulfilledOrder);
                 let cancelledOrder = dexContract.filters.OrderCancelled(null,account);
@@ -85,13 +87,15 @@ const UserOrders = () => {
             setOrders([]);
 
             queryOrders.map(queryOrder => {
+                let sell = new BigNumber(queryOrder.args[4].toString());
+                let buy = new BigNumber(queryOrder.args[5].toString());
                 return (
                     setOrders(orders => [...orders, {
                         id: queryOrder.args[0].toString(),
                         sell: queryOrder.args[2].toString(),
                         buy: queryOrder.args[3].toString(),
-                        sellAmount: queryOrder.args[4].toString(),
-                        buyAmount: queryOrder.args[5].toString(),
+                        sellAmount: sell.dividedBy(UNIT).toNumber(),
+                        buyAmount: buy.dividedBy(UNIT).toNumber(),
                     }]));
             });
 
@@ -122,8 +126,8 @@ const UserOrders = () => {
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell textAlign='center'>ID</Table.HeaderCell>
-                            <Table.HeaderCell textAlign='center'>Token 1</Table.HeaderCell>
-                            <Table.HeaderCell textAlign='center'>Token 2</Table.HeaderCell>
+                            <Table.HeaderCell textAlign='center'>Sell Token</Table.HeaderCell>
+                            <Table.HeaderCell textAlign='center'>Buy Token</Table.HeaderCell>
                             <Table.HeaderCell textAlign='center'>Sell Amount</Table.HeaderCell>
                             <Table.HeaderCell textAlign='center'>Buy Amount</Table.HeaderCell>
                             <Table.HeaderCell textAlign='center'>Actions</Table.HeaderCell>
