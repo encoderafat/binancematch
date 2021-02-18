@@ -22,7 +22,7 @@ Cancel Offer.
 
 ```cancelOffer(uint _id) ```
 
-Create a Token Pair if it doesn't already exist.
+Create a Token Pair if it doesn't already exist. In this contract users can't add a new token but they can add new pairs for the existing tokens.
 
 ```createTokenPair(address _tokenAddress1, address _tokenAddress2) ```
 
