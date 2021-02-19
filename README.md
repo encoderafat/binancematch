@@ -55,7 +55,7 @@ Check if `(tSellQuantity/tBuyQuantity >= mBuyQuantity/mSellQuantity)` is true. I
 
 ### Contract Interactor GUI Requirements
 
-[Link to the App.](https://pedantic-ritchie-b4130f.netlify.app/)
+[Link to the App.](https://hungry-lamport-a311e5.netlify.app/)
 
 1. Metamask [Download Link](https://metamask.io/)
 
