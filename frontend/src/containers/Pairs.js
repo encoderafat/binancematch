@@ -112,7 +112,7 @@ const Pairs = () => {
                 </Table>
             </Grid.Row>
             <Grid.Row centered>
-                <h2>Create Additional Pairs</h2>
+                <h2>Add More Pairs</h2>
             </Grid.Row>
             <Grid.Row centered columns={3}>
                 <Grid.Column textAlign='center'>

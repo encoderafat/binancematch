@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core';
 import exchange from '../contracts/Dex.json';
 import { EXCHANGEADD } from '../assets/Exchange';
 import Toolbar from '../components/Toolbar';
-import { Table, Dropdown, Grid, Button } from 'semantic-ui-react';
+import { Table, Dropdown, Grid, Button, Label } from 'semantic-ui-react';
 import BigNumber from 'bignumber.js';
 
 const UNIT = 1000000000000000000;
@@ -114,11 +114,14 @@ const UserOrders = () => {
     return (
         <>
         <Toolbar />
-        <Grid>
-            <Grid.Row>
-                <Dropdown placeholder="Manage Orders" options={options} onChange={selectOrderType} fluid search selection/>
+        <Grid divided='vertically'>
+            <Grid.Row centered>
+                <Label color='blue'>
+                    Manage Orders
+                </Label>
+                <Dropdown placeholder="Outstanding Orders" options={options} onChange={selectOrderType} search selection/>
             </Grid.Row>
-            <Grid.Row>
+            <Grid.Row centered>
                 <h2 style={{textAlign: "center"}}>{tableHeading}</h2>
             </Grid.Row>
             <Grid.Row centered>

@@ -17,7 +17,6 @@ import Front from '../components/Front';
 const Home = () => {
   const [tradingPairs,setTradingPairs] = useState([]);
   const [tradingPairID,setTradingPairID] = useState(1);
-  const [numPairs,setNumPairs] = useState(0);
   const [loaded,setLoaded] = useState(false);
   const [firstToken,setFirstToken] = useState('');
   const [firstAddress,setFirstAddress] = useState('');
@@ -39,8 +38,6 @@ const Home = () => {
         //const signer = provider.getSigner();
         const contract = new ethers.Contract(exchangeAddress, exchange.abi, provider);
         let id = (await contract.getTotalPairs()).toNumber();
-        let ntoks = 2 *id;
-        setNumPairs(ntoks);
         setTradingPairs([]);
         for(let i = 1; i <= id; ++i) {
             let pairInfo = await contract.getPairInfo(i);

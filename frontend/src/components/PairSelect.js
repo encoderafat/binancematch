@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Dropdown } from 'semantic-ui-react';
+import { Grid, Dropdown, Label } from 'semantic-ui-react';
 
 const PairSelect = ({tradingPairs,setPairID}) => {
     const [options,setOptions] = useState([]);
@@ -21,7 +21,11 @@ const PairSelect = ({tradingPairs,setPairID}) => {
 
     return (
         <Grid.Row centered style={{padding: '10px'}}>
-            <Dropdown placeholder='Select Trading Pair. Default RTK/STOK' options={options} onChange={setPairID} fluid search selection/>
+            <Label color='blue'>
+                SELECT PAIR
+            </Label>
+            <Dropdown placeholder=' Default RTK/STOK' options={options} onChange={setPairID} search selection/>
+            
         </Grid.Row>
     )
 }
