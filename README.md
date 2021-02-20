@@ -12,7 +12,31 @@ This contract is a simplified and heavily modified version of Maker On-Chain OTC
 
 I submitted a version of this project for the Encode club hackathon last month [here.](https://github.com/encoderafat/binancedex). Since then I have worked on the contract and streamlined it further. The GUI has also been modified to manage user's contracts (cancel contracts etc.) and it should now be more stable and more responsive.
 
-### Matching Engine Function Calls
+## Backend
+
+Contracts are compiled and migrated using Truffle.
+
+  ### Test
+  ```truffle test```
+  
+  ### Migrate to BSC Testnet
+  
+  Store Metamask mnemonic in a file called .secret in the truffle folder.
+  
+  ```truffle migrate --network testnet```
+  
+
+## Frontend
+
+### Install
+
+### `yarn`
+
+### Start Local server
+
+### `yarn start`
+
+## Matching Engine Function Calls
 
 Create Trade Offer : Exchange Token1 (Sell) for Token2 (Buy).
 
@@ -42,7 +66,7 @@ getPrevOffer(uint id) public view returns(uint)
 ```
 
 
-### Matching Engine Algorithm
+## Matching Engine Algorithm
 
 Let `tSellQuantity` be the amount taker is selling.
 Let `tBuyQuantity` is the amount taker is buying.
@@ -53,7 +77,7 @@ Let `mBuyQuantity` is the amount maker is buying.
 Check if `(tSellQuantity/tBuyQuantity >= mBuyQuantity/mSellQuantity)` is true. If true, internal function `buy(uint id, uint quantity) ` is called to execute transaction where `quantity` is `min(mSellQuantity,tBuyQuantity)`. `tSellQuantity` and `tBuyQuantity` are updated next. The loop exits if either of these values become zero, otherwise the next iteration is done.
 
 
-### Contract Interactor GUI Requirements
+## Contract Interactor GUI Requirements
 
 [Link to the App.](https://hungry-lamport-a311e5.netlify.app/)
 
