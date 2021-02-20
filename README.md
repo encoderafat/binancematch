@@ -10,7 +10,7 @@ Demo Slides: https://docs.google.com/presentation/d/1VzVS301IJ8Kdu5OTT_9NelQzBLy
 
 This contract is a simplified and heavily modified version of Maker On-Chain OTC-Market for ERC-20 compatible tokens available [here.](https://github.com/daifoundation/maker-otc). Orderbooks for buy/sell markets are implemented as two double-linked sorted lists. Match Engine tries to match any new offer with existing offers. If there is no match, the new offer is added to the orderbook. At any point in time, the liquidity of the exchange is directly proportional to number of existing offers in the buy/sell markets.
 
-I submitted a version of this project for the Encode club hackathon last month [here.](https://github.com/encoderafat/binancedex). Since then I have worked on the contract and streamlined it further. The GUI has also been modified to manage user's contracts (cancel contracts etc.) and it should be now more stable.
+I submitted a version of this project for the Encode club hackathon last month [here.](https://github.com/encoderafat/binancedex). Since then I have worked on the contract and streamlined it further. The GUI has also been modified to manage user's contracts (cancel contracts etc.) and it should now be more stable and more responsive.
 
 ### Matching Engine Function Calls
 
