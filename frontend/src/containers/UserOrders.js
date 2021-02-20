@@ -125,7 +125,7 @@ const UserOrders = () => {
                 <h2 style={{textAlign: "center"}}>{tableHeading}</h2>
             </Grid.Row>
             <Grid.Row centered>
-                <Table celled padded>
+                <Table basic celled>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell textAlign='center'>ID</Table.HeaderCell>

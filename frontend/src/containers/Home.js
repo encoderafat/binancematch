@@ -76,7 +76,7 @@ const Home = () => {
         {active ? (
           <div>
             <div>ChainId: {chainId}</div>
-            <div>Account: {account}</div>   
+            <div style={{overflow: 'hidden'}}>Account: {account}</div>   
           </div>
         ) : (
           <Button primary onClick={onButtonClick}>

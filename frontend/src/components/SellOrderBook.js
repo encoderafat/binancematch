@@ -80,7 +80,7 @@ const SellOrderBook = ({firstToken,firstAddress,secondToken,secondAddress}) => {
     },[orderSize]);
 
     return (
-        <Table celled padded>
+        <Table basic celled>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell textAlign='center'>{`Price (${secondToken})`}</Table.HeaderCell>

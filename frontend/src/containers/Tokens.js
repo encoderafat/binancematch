@@ -8,7 +8,7 @@ const Tokens = () => {
     return (
         <>
         <Toolbar />
-        <Table celled padded>
+        <Table basic celled>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell textAlign='center'>Name</Table.HeaderCell>

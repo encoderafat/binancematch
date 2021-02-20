@@ -10,7 +10,6 @@ const exchangeAddress = EXCHANGEADD.address;
 
 const Pairs = () => {
     const [tokenPairs,setTokenPairs] = useState([]);
-    const [numPairs,setNumPairs] = useState(0);
     const [options,setOptions] = useState([]);
     const [firstToken,setFirstToken] = useState('');
     const [secondToken,setSecondToken] = useState('');
@@ -37,7 +36,6 @@ const Pairs = () => {
             //const signer = provider.getSigner();
             const contract = new ethers.Contract(exchangeAddress, exchange.abi, provider);
             let id = (await contract.getTotalPairs()).toNumber();
-            setNumPairs(id);
             setTokenPairs([]);
             for(let i = 1; i <= id; ++i) {
                 let pairInfo = await contract.getPairInfo(i);
@@ -90,7 +88,7 @@ const Pairs = () => {
                 <h2>Available Token Pairs</h2>
             </Grid.Row>
             <Grid.Row centered>
-                <Table celled padded>
+                <Table basic celled>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell textAlign='center'>Pair ID</Table.HeaderCell>

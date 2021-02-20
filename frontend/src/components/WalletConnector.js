@@ -84,7 +84,7 @@ export const TokenList = ({chainId}) => {
   if (chainId === 97) {
     return (
       <>
-        <Table basic celled collapsing>
+        <Table basic celled>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell textAlign='center'>Symbol</Table.HeaderCell>

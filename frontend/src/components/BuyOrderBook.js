@@ -81,7 +81,7 @@ const BuyOrderBook = ({firstToken,firstAddress,secondToken,secondAddress}) => {
     
 
     return (
-        <Table celled padded>
+        <Table basic celled>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell textAlign='center'>{`Price (${secondToken})`}</Table.HeaderCell>
