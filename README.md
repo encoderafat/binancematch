@@ -4,7 +4,7 @@ Contract Address : ```0x271DBCFBF2247EE08C1Fb4387a4c80A80Efd7E4f```
 
 Contract GUI: https://hungry-lamport-a311e5.netlify.app/
 
-Demo Video: 
+Demo Video: https://drive.google.com/file/d/1SByQjndW3YwZNgGLWQ0eYV6bqU7tocCB/view?usp=sharing
 
 Demo Slides: https://docs.google.com/presentation/d/1VzVS301IJ8Kdu5OTT_9NelQzBLyyq2jFfA6UgVBTXRU/edit?usp=sharing
 
